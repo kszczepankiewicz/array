@@ -12,23 +12,23 @@ const addTimestamp = str => `${(new Date).toISOString()} ${str}`;
 pushForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const value = pushInput.value.trim();
-    if (!value) return;
     manipulateArr((arr, val) => arr.push(val), addTimestamp(value));
     navigator.clipboard.writeText(value).catch(() => alert('Not copied'));
-    window.open(LINK);
+    if (value) window.open(LINK);
 });
 function manipulateArr(func, value) {
     const arr = getArr();
     func(arr, value);
-    renderArr(arr);
     setArr(arr);
+    renderArr(arr);
 }
 popButton.addEventListener('click', (e) => {
     e.preventDefault();
+    if (!confirm('Are you sure to delete?')) return;
     manipulateArr(arr => arr.pop());
 });
 
-const renderArr = arr => pushOutput.textContent = arr.join('\n');
+const renderArr = arr => pushOutput.textContent = arr.reverse().join('\n');
 const setArr = arr => localStorage.setItem(LOCAL_STORAGE_ITEM_NAME, JSON.stringify(arr));
 const getArr = () => {
     const raw = localStorage.getItem(LOCAL_STORAGE_ITEM_NAME);
@@ -42,6 +42,5 @@ const getArr = () => {
     if (!Array.isArray(arr)) return [];
     return arr;
 };
-
 
 renderArr(getArr());
