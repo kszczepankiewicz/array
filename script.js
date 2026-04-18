@@ -5,8 +5,9 @@ const LOCAL_STORAGE_ITEM_NAME = 'array';
 const pushForm = document.getElementById('push-form');
 const pushInput = document.getElementById('push-input');
 const popButton = document.getElementById('pop-button');
-const pushOutput = document.getElementById('push-output');
+const shiftButton = document.getElementById('shift-button');
 
+const pushOutput = document.getElementById('push-output');
 const addTimestamp = str => `${(new Date).toISOString()} ${str}`;
 
 pushForm.addEventListener('submit', (e) => {
@@ -26,6 +27,11 @@ popButton.addEventListener('click', (e) => {
     e.preventDefault();
     if (!confirm('Are you sure to delete?')) return;
     manipulateArr(arr => arr.pop());
+});
+shiftButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (!confirm('Are you sure to delete?')) return;
+    manipulateArr(arr => arr.shift());
 });
 
 const renderArr = arr => pushOutput.textContent = arr.reverse().join('\n');
