@@ -1,0 +1,5 @@
+#push-form,
+#unshift-form {
+    display: flex;
+    flex-direction: column;
+}
