@@ -18,7 +18,7 @@ pushForm.addEventListener('submit', (e) => {
     openPageOrApp(value);
 });
 function openPageOrApp(value) {
-    if (value) return;
+    if (!value) return;
 
     // Configuration for the ChatGPT Android App
     const packageName = 'com.openai.chatgpt';
