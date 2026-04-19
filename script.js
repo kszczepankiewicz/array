@@ -18,7 +18,18 @@ pushForm.addEventListener('submit', (e) => {
     openPageOrApp(value);
 });
 function openPageOrApp(value) {
-    if (value) window.open(LINK);
+    if (value) return;
+
+    // Configuration for the ChatGPT Android App
+    const packageName = 'com.openai.chatgpt';
+    const fallbackUrl = LINK;
+
+    // Construct the Android Intent URI
+    // This tells Android: Open this package, or go to the fallback URL if not found.
+    const intentUri = `intent://chat#Intent;scheme=https;package=${packageName};S.browser_fallback_url=${encodeURIComponent(fallbackUrl)};end;`;
+
+    // We use location.href because window.open is often blocked by mobile popup blockers
+    window.location.href = intentUri;
 }
 
 function manipulateArr(func, value) {
