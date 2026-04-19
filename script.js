@@ -15,8 +15,12 @@ pushForm.addEventListener('submit', (e) => {
     const value = pushInput.value.trim();
     manipulateArr((arr, val) => arr.push(val), addTimestamp(value));
     navigator.clipboard.writeText(value).catch(() => alert('Not copied'));
-    if (value) window.open(LINK);
+    openPageOrApp(value);
 });
+function openPageOrApp(value) {
+    if (value) window.open(LINK);
+}
+
 function manipulateArr(func, value) {
     const arr = getArr();
     func(arr, value);
